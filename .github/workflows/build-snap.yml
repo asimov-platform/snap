@@ -4,7 +4,6 @@ on:
   push:
 
 jobs:
-  # 1) Build & upload snap
   build-snap:
     runs-on: ubuntu-latest
     steps:
@@ -20,38 +19,18 @@ jobs:
       - name: Build Snap (Destructive Mode)
         run: |
           snapcraft --destructive-mode
-          ls -l *.snap  # Debug: confirm the .snap file is present
+          ls -l *.snap
 
       - name: Upload Snap Artifact
         uses: actions/upload-artifact@main
         with:
-          # "asimov-cli-snap" is the artifact name
-          # The path must match where *.snap is actually produced
           name: asimov-cli-snap
           path: "*.snap"
 
-  # 2) Download & test snap
-  test-snap:
-    # Ensure this job only runs after build-snap finishes
-    needs: build-snap
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Snap Artifact
-        uses: actions/download-artifact@main
-        with:
-          # Must match the "name" used in upload-artifact
-          name: asimov-cli-snap
-
-          # Optional: specify "path: ." if you want the .snap file
-          # in the current working directory. Otherwise, it goes into
-          # a folder named after the artifact by default.
-          path: .
-
-      - name: Verify downloaded files
-        run: ls -l
-
-      - name: Install and test Snap
+      - name: Install Snap Package
         run: |
-          # The .snap is now in the current directory.
-          sudo snap install --dangerous ./*.snap
-          asimov --version
+          SNAP_FILE=$(ls *.snap)
+          sudo snap install --dangerous "$SNAP_FILE"
+
+      - name: Verify Installation (asimov --version)
+        run: asimov --version
