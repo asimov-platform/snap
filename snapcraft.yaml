@@ -30,4 +30,3 @@ parts:
 apps:
   asimov:
     command: bin/asimov
-    aliases: [asimov]
