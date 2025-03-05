@@ -40,4 +40,4 @@ jobs:
         run: snap info asimov-cli
 
       - name: Verify Installation (asimov --version)
-        run: snap run asimov --version
+        run: snap run asimov-cli.asimov --version
