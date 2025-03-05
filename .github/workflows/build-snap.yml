@@ -27,7 +27,7 @@ jobs:
           asimov --version
 
       - name: Upload Snap Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: asimov-cli-snap
           path: "*.snap"
