@@ -23,10 +23,10 @@ parts:
 
     override-build: |
       mkdir -p "$SNAPCRAFT_PART_INSTALL/bin"
-      mv asimov-linux-x86 "$SNAPCRAFT_PART_INSTALL/bin/asimov-cli"
+      mv asimov-linux-x86 "$SNAPCRAFT_PART_INSTALL/bin/asimov"
 
       snapcraftctl build
 
 apps:
-  asimov-cli:
-    command: bin/asimov-cli
+  asimov:
+    command: bin/asimov

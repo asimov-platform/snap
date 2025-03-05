@@ -3,7 +3,6 @@ name: Build Snap
 on:
   push:
 #    branches: [ "main" ]
-
 #  pull_request:
 
 jobs:
@@ -20,11 +19,15 @@ jobs:
         run: sudo snap install core22 --channel=latest/stable
 
       - name: Build Snap (Destructive Mode)
+        run: snapcraft --destructive-mode
+
+      - name: Test Snap Installation
         run: |
-          snapcraft --destructive-mode
+          sudo snap install --dangerous ./*.snap
+          asimov --version
 
       - name: Upload Snap Artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: asimov-cli-snap
-          path: "snap/*.snap"
+          path: "*.snap"
