@@ -23,7 +23,7 @@ jobs:
           ls -l *.snap  # Debug: confirm the .snap file is present
 
       - name: Upload Snap Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           # "asimov-cli-snap" is the artifact name
           # The path must match where *.snap is actually produced
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Snap Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@main
         with:
           # Must match the "name" used in upload-artifact
           name: asimov-cli-snap
