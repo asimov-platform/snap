@@ -12,6 +12,9 @@ parts:
     plugin: dump
     source: .
 
+    stage-packages:
+      - libc6
+
     override-pull: |
       snapcraftctl pull
 
