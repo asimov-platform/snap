@@ -11,12 +11,6 @@ parts:
   asimov-cli:
     plugin: dump
     source: .
-    build-packages:
-      - build-essential
-      - gcc
-      - g++
-    stage-packages:
-      - libc6
 
     override-pull: |
       snapcraftctl pull
