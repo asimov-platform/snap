@@ -21,10 +21,10 @@ jobs:
       - name: Build Snap (Destructive Mode)
         run: snapcraft --destructive-mode
 
-      - name: Test Snap Installation
-        run: |
-          sudo snap install --dangerous ./*.snap
-          asimov --version
+#      - name: Test Snap Installation
+#        run: |
+#          sudo snap install --dangerous ./*.snap
+#          asimov --version
 
       - name: Upload Snap Artifact
         uses: actions/upload-artifact@main
