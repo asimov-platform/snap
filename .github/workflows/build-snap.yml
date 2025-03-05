@@ -32,5 +32,14 @@ jobs:
           SNAP_FILE=$(ls *.snap)
           sudo snap install --dangerous "$SNAP_FILE"
 
+      - name: List Installed Snaps
+        run: snap list
+
+      - name: Check Installed Snap Files
+        run: ls -l /snap/bin
+
+      - name: Restart Snap Daemon
+        run: sudo systemctl restart snapd
+
       - name: Verify Installation (asimov --version)
-        run: asimov --version
+        run: snap run asimov --version
