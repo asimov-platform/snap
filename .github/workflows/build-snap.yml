@@ -21,7 +21,6 @@ jobs:
 
       - name: Build Snap (Destructive Mode)
         run: |
-          cd snap
           snapcraft --destructive-mode
 
       - name: Upload Snap Artifact
