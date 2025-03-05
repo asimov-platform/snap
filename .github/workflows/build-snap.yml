@@ -36,5 +36,8 @@ jobs:
       - name: List Installed Snaps
         run: snap list
 
+      - name: Check Available Commands
+        run: snap info asimov-cli
+
       - name: Verify Installation (asimov --version)
         run: snap run asimov --version
