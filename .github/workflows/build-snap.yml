@@ -1,0 +1,31 @@
+name: Build Snap
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - "*"
+
+jobs:
+  build-snap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install Snapcraft
+        run: sudo snap install snapcraft --classic
+
+      - name: Pre-install core22
+        run: sudo snap install core22 --channel=latest/stable
+
+      - name: Build Snap (Destructive Mode)
+        run: |
+          cd snap
+          snapcraft --destructive-mode
+
+      - name: Upload Snap Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: asimov-cli-snap
+          path: "snap/*.snap"
