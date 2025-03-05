@@ -19,7 +19,7 @@ jobs:
       - name: Build Snap (Destructive Mode)
         run: |
           snapcraft --destructive-mode
-          ls -l *.snap
+          ls -lh *.snap
 
       - name: Upload Snap Artifact
         uses: actions/upload-artifact@main
@@ -27,19 +27,14 @@ jobs:
           name: asimov-cli-snap
           path: "*.snap"
 
+      - name: Check Built Snap File
+        run: ls -lh *.snap
+
       - name: Install Snap Package
-        run: |
-          SNAP_FILE=$(ls *.snap)
-          sudo snap install --dangerous "$SNAP_FILE"
+        run: sudo snap install --dangerous --devmode *.snap || (echo "Snap installation failed!" && exit 1)
 
       - name: List Installed Snaps
         run: snap list
-
-      - name: Check Installed Snap Files
-        run: ls -l /snap/bin
-
-      - name: Restart Snap Daemon
-        run: sudo systemctl restart snapd
 
       - name: Verify Installation (asimov --version)
         run: snap run asimov --version
