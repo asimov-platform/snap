@@ -1,6 +1,6 @@
 # Snap Package for ASIMOV Platform
 
-This repository provides the Snap package for the [ASIMOV Platform], allowing users to easily install and run the CLI on **Linux** distributions that support Snap.
+This repository provides the Snap package for the [ASIMOV Platform]
 
 ## **Prerequisites**
 
