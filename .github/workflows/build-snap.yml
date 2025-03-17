@@ -48,20 +48,26 @@ jobs:
       # Extract the version from snapcraft.yaml
       - name: Extract Version from snapcraft.yaml
         id: get_version
-        run: echo "SNAP_VERSION=$(grep '^version:' snapcraft.yaml | awk '{print $2}' | tr -d "'")" >> $GITHUB_ENV
+        run: |
+          SNAP_VERSION=$(awk -F': ' '/^version:/ {print $2}' snapcraft.yaml | tr -d "'")
+          echo "SNAP_VERSION=$SNAP_VERSION" >> $GITHUB_ENV
 
       # Create a Git tag if it does not exist
       - name: Create Git Tag
         run: |
-          if git rev-parse "v${{ env.SNAP_VERSION }}" >/dev/null 2>&1; then
-            echo "Tag v${{ env.SNAP_VERSION }} already exists. Skipping tag creation."
+          TAG_NAME="v${{ env.SNAP_VERSION }}"
+          
+          # Check if the tag exists remotely
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME"; then
+            echo "Tag $TAG_NAME already exists. Skipping tag creation."
           else
-            git tag v${{ env.SNAP_VERSION }}
-            git push origin v${{ env.SNAP_VERSION }}
+            git tag "$TAG_NAME"
+            git push origin "$TAG_NAME"
           fi
 
-      # Create GitHub Release and attach the .snap file
+      # Create GitHub Release if the tag was just created
       - name: Create GitHub Release
+        if: success()
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ env.SNAP_VERSION }}"
