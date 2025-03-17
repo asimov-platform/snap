@@ -50,11 +50,15 @@ jobs:
         id: get_version
         run: echo "SNAP_VERSION=$(grep '^version:' snapcraft.yaml | awk '{print $2}' | tr -d "'")" >> $GITHUB_ENV
 
-      # Create a Git tag based on the extracted version
+      # Create a Git tag if it does not exist
       - name: Create Git Tag
         run: |
-          git tag v${{ env.SNAP_VERSION }}
-          git push origin v${{ env.SNAP_VERSION }}
+          if git rev-parse "v${{ env.SNAP_VERSION }}" >/dev/null 2>&1; then
+            echo "Tag v${{ env.SNAP_VERSION }} already exists. Skipping tag creation."
+          else
+            git tag v${{ env.SNAP_VERSION }}
+            git push origin v${{ env.SNAP_VERSION }}
+          fi
 
       # Create GitHub Release and attach the .snap file
       - name: Create GitHub Release
