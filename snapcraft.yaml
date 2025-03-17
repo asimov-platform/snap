@@ -16,7 +16,7 @@ parts:
       snapcraftctl pull
 
       wget -O asimov-linux-x86.gz \
-        https://github.com/asimov-platform/asimov-cli/releases/download/25.0.0-dev.2/asimov-linux-x86.gz
+        https://github.com/asimov-platform/asimov-cli/releases/download/25.0.0-dev.3/asimov-linux-x86.gz
 
       gunzip asimov-linux-x86.gz
       chmod +x asimov-linux-x86

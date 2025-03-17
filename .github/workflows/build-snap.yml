@@ -41,3 +41,25 @@ jobs:
 
       - name: Verify Installation (asimov --version)
         run: snap run asimov-cli.asimov --version
+
+      # Extract the version from snapcraft.yaml
+      - name: Extract Version from snapcraft.yaml
+        id: get_version
+        run: echo "SNAP_VERSION=$(grep '^version:' snapcraft.yaml | awk '{print $2}' | tr -d "'")" >> $GITHUB_ENV
+
+      # Create a Git tag based on the extracted version
+      - name: Create Git Tag
+        run: |
+          git tag v${{ env.SNAP_VERSION }}
+          git push origin v${{ env.SNAP_VERSION }}
+
+      # Create GitHub Release and attach the .snap file
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "v${{ env.SNAP_VERSION }}"
+          name: "Asimov CLI Release ${{ env.SNAP_VERSION }}"
+          body: "Automated release for Asimov CLI Snap build version ${{ env.SNAP_VERSION }}."
+          draft: false
+          prerelease: true
+          files: "*.snap"
