@@ -5,7 +5,7 @@ summary: ASIMOV CLI Snap
 description: "Bundles a prebuilt ASIMOV CLI binary (gzipped) into a snap."
 
 grade: devel
-confinement: strict
+confinement: classic
 
 parts:
   asimov-cli:
