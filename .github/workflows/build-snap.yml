@@ -34,7 +34,7 @@ jobs:
         run: sudo snap install --dangerous --classic *.snap
 
       - name: Add /snap/bin to PATH
-        run: echo "/snap/bin" >> $GITHUB_PATH
+        run: echo "PATH=/snap/bin:$PATH" >> $GITHUB_ENV
 
       - name: Verify Installation (asimov --version)
         run: asimov --version
