@@ -33,11 +33,10 @@ jobs:
       - name: Install Snap Package
         run: sudo snap install --dangerous --classic *.snap
 
-      - name: Add /snap/bin to PATH
-        run: echo "PATH=/snap/bin:$PATH" >> $GITHUB_ENV
-
       - name: Verify Installation (asimov --version)
-        run: asimov --version
+        run: |
+          export PATH="/snap/bin:$PATH"
+          asimov --version
 
       - name: Extract Version from snapcraft.yaml
         id: get_version
