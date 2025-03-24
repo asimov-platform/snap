@@ -1,11 +1,11 @@
-name: asimov-cli
+name: asimov
 base: core22
 version: '25.0.0-dev.3'
 summary: ASIMOV CLI Snap
 description: "Bundles a prebuilt ASIMOV CLI binary (gzipped) into a snap."
 
 grade: devel
-confinement: strict
+confinement: classic
 
 parts:
   asimov-cli:

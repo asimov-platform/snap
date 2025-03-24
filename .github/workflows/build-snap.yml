@@ -31,10 +31,10 @@ jobs:
           path: "*.snap"
 
       - name: Install Snap Package
-        run: sudo snap install --dangerous --devmode *.snap
+        run: sudo snap install --dangerous --classic *.snap
 
       - name: Verify Installation (asimov --version)
-        run: snap run asimov-cli.asimov --version
+        run: asimov --version
 
       - name: Extract Version from snapcraft.yaml
         id: get_version
