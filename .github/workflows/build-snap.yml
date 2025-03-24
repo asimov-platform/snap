@@ -34,7 +34,7 @@ jobs:
         run: ls -lh *.snap
 
       - name: Install Snap Package
-        run: sudo snap install --dangerous --devmode *.snap || (echo "Snap installation failed!" && exit 1)
+        run: sudo snap install --dangerous --classic *.snap || (echo "Snap installation failed!" && exit 1)
 
       - name: List Installed Snaps
         run: snap list
@@ -43,7 +43,7 @@ jobs:
         run: snap info asimov-cli
 
       - name: Verify Installation (asimov --version)
-        run: snap run asimov-cli.asimov --version
+        run: asimov --version
 
       # Extract the version from snapcraft.yaml
       - name: Extract Version from snapcraft.yaml
