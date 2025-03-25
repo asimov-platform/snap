@@ -19,10 +19,10 @@ wget https://github.com/asimov-platform/snap/releases/download/v25.0.0-dev.3/asi
 
 ## Installation
 
-Once the download is complete, install the Snap package using:
+Once the download is complete, install the Snap package locally in classic mode using:
 
 ```bash
-sudo snap install --dangerous ~/asimov/asimov-cli.snap
+sudo snap install --dangerous --classic ~/asimov/asimov-cli.snap
 ```
 
 ## Usage
@@ -30,13 +30,13 @@ sudo snap install --dangerous ~/asimov/asimov-cli.snap
 After installation, you can run the CLI with:
 
 ```bash
-snap run asimov-cli.asimov --help
+asimov --help
 ```
 
 To check the installed version:
 
 ```bash
-snap run asimov-cli.asimov --version
+asimov --version
 ```
 
 ## Troubleshooting
